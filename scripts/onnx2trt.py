@@ -58,7 +58,9 @@ class EngineBuilder:
 
         self.builder = trt.Builder(self.trt_logger)
         self.config = self.builder.create_builder_config()
-        self.config.max_workspace_size = 12 * (2 ** 30)  # 12 GB
+        # Update from deprecated max_workspace_size to newer API
+        memory_size = 12 * (2 ** 30)  # 12 GB
+        self.config.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, memory_size)
 
         profile = self.builder.create_optimization_profile()
 

@@ -12,4 +12,3 @@ dist
 checkpoints_test
 logs
 third_party
-modal_deploy.py
