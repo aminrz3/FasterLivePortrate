@@ -7,7 +7,7 @@ modal_gpu = "A10"
 DIR = "/root/"
 torch_install = "pip install torch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 --index-url https://download.pytorch.org/whl/cu118"
 clone_cmd = (
-    f"git clone https://github.com/warmshao/FasterLivePortrait.git /tmp/repo && "
+    f"git clone https://github.com/aminrz3/FasterLivePortrate.git /tmp/repo && "
     f"mv /tmp/repo/* /root/ && "
     f"rm -rf /tmp/repo"
 )

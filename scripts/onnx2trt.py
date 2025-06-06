@@ -71,7 +71,7 @@ class EngineBuilder:
 
         self.config.add_optimization_profile(profile)
         # 严格类型约束
-        self.config.set_flag(trt.BuilderFlag.STRICT_TYPES)
+        #self.config.set_flag(trt.BuilderFlag.STRICT_TYPES)
 
         self.batch_size = None
         self.network = None
