@@ -130,9 +130,11 @@ class EngineBuilder:
             else:
                 self.config.set_flag(trt.BuilderFlag.FP16)
 
-        with self.builder.build_engine(self.network, self.config) as engine, open(engine_path, "wb") as f:
+        # Updated for TensorRT 23.11
+        serialized_engine = self.builder.build_serialized_network(self.network, self.config)
+        with open(engine_path, "wb") as f:
             log.info("Serializing engine to file: {:}".format(engine_path))
-            f.write(engine.serialize())
+            f.write(serialized_engine)
 
 
 def main(args):
