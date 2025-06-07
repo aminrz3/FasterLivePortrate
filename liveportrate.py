@@ -21,14 +21,13 @@ flavor = "devel"
 operating_sys = "ubuntu22.04"
 tag = f"{cuda_version}-{flavor}-{operating_sys}"
 model_image = (
-   Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.10").pip_install(
+   Image.from_registry(f"nvcr.io/nvidia/tensorrt:23.11-py3", add_python="3.10").pip_install(
         "huggingface_hub",
         "Pillow",
         "Requests",
         "transformers",
         "peft",
         "onnxruntime-gpu",
-        "tensorrt",
     ).apt_install([
         "ffmpeg",
         "git",
@@ -37,7 +36,7 @@ model_image = (
         "libglib2.0-0",
         "build-essential",
         "clang",
-    ]).run_commands([
+    ]).pip_install("tensorrt").run_commands([
         # Original commands
         clone_cmd,
         torch_install,
@@ -167,6 +166,8 @@ def convertTRT():
         print(f"Exception during processing: {str(e)}")
         return {"error": str(e), "success": False}
 
+
 @app.local_entrypoint()
 def main():
-    convertTRT.remote()
+    convert_result = convertTRT.remote()
+    print(f"Conversion result: {convert_result}")
